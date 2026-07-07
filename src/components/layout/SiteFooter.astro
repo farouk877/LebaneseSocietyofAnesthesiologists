@@ -1,0 +1,20 @@
+---
+import type { SiteSettings } from '@utils/siteSchema';
+import { withBase } from '@utils/paths';
+
+interface Props {
+  site: SiteSettings;
+}
+
+const { site } = Astro.props;
+---
+
+<footer class="bg-white">
+  <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
+    <a href={withBase('/')} class="flex items-center gap-3 no-underline">
+      <img src={withBase(site.logo.src)} alt="" class="h-10 w-10 rounded-md" />
+      <span class="text-lg font-semibold text-lsa-forest">{site.societyName}</span>
+    </a>
+    <p class="font-sans text-sm text-lsa-muted">{site.footer.text}</p>
+  </div>
+</footer>

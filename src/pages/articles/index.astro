@@ -1,0 +1,68 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SiteFooter from '@components/layout/SiteFooter.astro';
+import SiteHeader from '@components/layout/SiteHeader.astro';
+import { getCollection } from 'astro:content';
+import siteJson from '@data/site.json';
+import { siteSchema } from '@utils/siteSchema';
+import { withBase } from '@utils/paths';
+
+const site = siteSchema.parse(siteJson);
+const monthFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  year: 'numeric'
+});
+
+const articles = (await getCollection('resources'))
+  .filter((resource) => resource.data.status === 'published' && resource.data.category === 'article-of-the-month')
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout
+  title={`Articles of the Month | ${site.societyName}`}
+  description="Articles of the Month from the Lebanese Society of Anesthesiologists."
+  canonicalUrl={`${site.seo.canonicalUrl.replace(/\/$/, '')}/articles/`}
+  socialImage={site.seo.socialImage}
+>
+  <SiteHeader site={site} />
+  <main class="min-h-screen bg-lsa-paper pt-[68px]">
+    <section class="border-b border-lsa-line bg-white">
+      <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+        <a href={withBase('/#resources')} class="font-sans text-sm font-semibold text-lsa-green underline">Back to resources</a>
+        <p class="mt-10 font-sans text-sm font-semibold uppercase tracking-[0.16em] text-lsa-green">Articles of the Month</p>
+        <h1 class="mt-4 text-5xl leading-tight text-lsa-forest sm:text-6xl">Monthly article archive</h1>
+        <p class="mt-5 max-w-2xl font-sans text-base leading-8 text-lsa-muted">
+          Browse published article selections, with the latest articles listed first.
+        </p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
+      {articles.length ? (
+        <div class="grid gap-5">
+          {articles.map((article) => (
+            <article class="rounded-md border border-lsa-line bg-white p-6 shadow-soft">
+              <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <p class="font-sans text-sm font-semibold text-lsa-muted">{monthFormatter.format(article.data.date)}</p>
+                {article.data.featured && <span class="w-fit rounded-md bg-lsa-mist px-2 py-1 font-sans text-xs font-semibold text-lsa-green">Featured</span>}
+              </div>
+              <h2 class="mt-4 text-3xl leading-tight text-lsa-forest">
+                <a href={withBase(`/articles/${article.id}/`)} class="no-underline hover:underline">{article.data.title}</a>
+              </h2>
+              <p class="mt-4 font-sans text-base leading-8 text-lsa-muted">{article.data.summary}</p>
+              <div class="mt-6 flex flex-wrap items-center gap-4">
+                <span class="font-sans text-sm font-semibold text-lsa-green">{article.data.source || 'LSA'}</span>
+                <a href={withBase(`/articles/${article.id}/`)} class="font-sans text-sm font-semibold text-lsa-forest underline">Read article</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="rounded-md border border-lsa-line bg-white p-6 font-sans text-sm leading-7 text-lsa-muted">
+          No published Articles of the Month are available yet.
+        </div>
+      )}
+    </section>
+  </main>
+  <SiteFooter site={site} />
+</BaseLayout>

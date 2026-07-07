@@ -1,0 +1,77 @@
+---
+import type { SiteSettings } from '@utils/siteSchema';
+import { withBase } from '@utils/paths';
+
+interface Props {
+  site: SiteSettings;
+  home?: boolean;
+}
+
+const { site, home = false } = Astro.props;
+const homePrefix = home ? '' : withBase('/');
+const navItems = [
+  { label: 'About', href: `${homePrefix}#about` },
+  { label: 'Guidelines', href: withBase('/guidelines/') },
+  { label: 'Events', href: withBase('/events/') },
+  { label: 'University Resources', href: withBase('/university-resources/') },
+  { label: 'Articles', href: withBase('/articles/') },
+  { label: 'Join Mailing List', href: `${homePrefix}#mailing-list` }
+];
+---
+
+<header class="fixed inset-x-0 top-0 z-50 border-b border-lsa-line/80 bg-white/92 backdrop-blur">
+  <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8" aria-label="Main navigation">
+    <a href={home ? '#top' : withBase('/')} class="flex min-w-0 items-center gap-3 no-underline">
+      <img src={withBase(site.logo.src)} alt={site.logo.alt} class="h-11 w-11 shrink-0 rounded-md" />
+      <span class="min-w-0 max-w-[190px] sm:max-w-[220px]">
+        <span class="block truncate text-base font-semibold leading-5 text-lsa-forest">Lebanese Society</span>
+        <span class="block truncate font-sans text-[0.68rem] uppercase tracking-[0.12em] text-lsa-muted">of Anesthesiologists</span>
+      </span>
+    </a>
+    <div class="hidden items-center gap-1 lg:flex">
+      {navItems.map((item) => (
+        <a href={item.href} class="rounded-md px-3 py-2 font-sans text-sm font-medium text-lsa-muted no-underline transition hover:bg-lsa-mist hover:text-lsa-forest">
+          {item.label}
+        </a>
+      ))}
+    </div>
+    <button
+      class="menu-toggle flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-md border border-lsa-line bg-white text-lsa-forest lg:hidden"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-navigation"
+      aria-label="Open navigation"
+    >
+      <span class="block h-0.5 w-5 bg-current"></span>
+      <span class="block h-0.5 w-5 bg-current"></span>
+      <span class="block h-0.5 w-5 bg-current"></span>
+    </button>
+  </nav>
+  <div id="mobile-navigation" class="mobile-nav hidden border-t border-lsa-line bg-white px-4 py-3 lg:hidden" data-open="false">
+    {navItems.map((item) => (
+      <a href={item.href} class="rounded-md px-3 py-3 font-sans text-sm font-semibold text-lsa-forest no-underline hover:bg-lsa-mist">
+        {item.label}
+      </a>
+    ))}
+  </div>
+</header>
+
+<script>
+  const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const mobileNav = document.querySelector<HTMLElement>('.mobile-nav');
+
+  menuButton?.addEventListener('click', () => {
+    const nextState = menuButton.getAttribute('aria-expanded') !== 'true';
+    menuButton.setAttribute('aria-expanded', String(nextState));
+    menuButton.setAttribute('aria-label', nextState ? 'Close navigation' : 'Open navigation');
+    mobileNav?.setAttribute('data-open', String(nextState));
+  });
+
+  mobileNav?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      menuButton?.setAttribute('aria-expanded', 'false');
+      menuButton?.setAttribute('aria-label', 'Open navigation');
+      mobileNav.setAttribute('data-open', 'false');
+    });
+  });
+</script>

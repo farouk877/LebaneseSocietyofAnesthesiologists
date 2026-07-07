@@ -1,0 +1,378 @@
+media:
+  - name: images
+    label: Images
+    input: public/uploads/images
+    output: /uploads/images
+    rename: safe
+    extensions: [png, jpg, jpeg, webp, svg]
+  - name: documents
+    label: Documents
+    input: public/uploads/documents
+    output: /uploads/documents
+    rename: safe
+    categories: [document]
+
+content:
+  - name: site
+    label: Site Settings
+    type: file
+    path: src/data/site.json
+    format: json
+    fields:
+      - name: societyName
+        label: Society Name
+        type: string
+        required: true
+      - name: logo
+        label: Logo
+        type: object
+        fields:
+          - name: src
+            label: Logo Image
+            type: image
+            required: true
+            options:
+              media: images
+              path: public/uploads/images
+          - name: alt
+            label: Logo Alt Text
+            type: string
+      - name: hero
+        label: Hero
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: heading
+            label: Heading
+            type: string
+            required: true
+          - name: subheading
+            label: Supporting Text
+            type: text
+            required: true
+          - name: image
+            label: Hero Image
+            type: image
+            options:
+              media: images
+              path: public/uploads/images
+          - name: imageAlt
+            label: Hero Image Alt Text
+            type: string
+          - name: primaryCta
+            label: Primary Button
+            type: object
+            fields:
+              - name: label
+                label: Button Label
+                type: string
+              - name: href
+                label: Button Link
+                type: string
+          - name: secondaryCta
+            label: Secondary Button
+            type: object
+            fields:
+              - name: label
+                label: Button Label
+                type: string
+              - name: href
+                label: Button Link
+                type: string
+      - name: navigation
+        label: Navigation
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{label}"
+        fields:
+          - name: label
+            label: Label
+            type: string
+          - name: href
+            label: Link
+            type: string
+      - name: about
+        label: About / History
+        type: object
+        fields:
+          - name: eyebrow
+            label: Section Label
+            type: string
+          - name: heading
+            label: Heading
+            type: string
+          - name: paragraphs
+            label: Paragraphs
+            type: text
+            list: true
+          - name: milestones
+            label: Milestones
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{title}"
+            fields:
+              - name: title
+                label: Title
+                type: string
+              - name: description
+                label: Description
+                type: text
+      - name: mission
+        label: Mission / Vision
+        type: object
+        fields:
+          - name: eyebrow
+            label: Section Label
+            type: string
+          - name: heading
+            label: Heading
+            type: string
+          - name: cards
+            label: Statements / Values
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{title}"
+            fields:
+              - name: title
+                label: Title
+                type: string
+              - name: description
+                label: Description
+                type: text
+      - name: board
+        label: Board Section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Section Label
+            type: string
+          - name: heading
+            label: Heading
+            type: string
+          - name: intro
+            label: Intro Text
+            type: text
+      - name: resources
+        label: Resources Section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Section Label
+            type: string
+          - name: heading
+            label: Heading
+            type: string
+          - name: intro
+            label: Intro Text
+            type: text
+      - name: mailingList
+        label: Mailing List
+        type: object
+        fields:
+          - name: eyebrow
+            label: Section Label
+            type: string
+          - name: heading
+            label: Heading
+            type: string
+          - name: description
+            label: Description
+            type: text
+          - name: buttonLabel
+            label: Button Label
+            type: string
+          - name: placeholderEmail
+            label: Email Placeholder
+            type: string
+          - name: endpoint
+            label: Google Apps Script Web App URL
+            type: string
+            description: Leave blank until the mailing-list Apps Script is deployed.
+          - name: consentLabel
+            label: Consent Label
+            type: text
+          - name: successMessage
+            label: Success Message
+            type: text
+          - name: errorMessage
+            label: Error Message
+            type: text
+          - name: configurationMessage
+            label: Not Connected Message
+            type: text
+      - name: contact
+        label: Contact Information
+        type: object
+        fields:
+          - name: email
+            label: Contact Email
+            type: string
+          - name: address
+            label: Address
+            type: text
+      - name: socialLinks
+        label: Social Links
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{label}"
+        fields:
+          - name: label
+            label: Label
+            type: string
+          - name: href
+            label: Link
+            type: string
+      - name: footer
+        label: Footer
+        type: object
+        fields:
+          - name: text
+            label: Footer Text
+            type: text
+      - name: seo
+        label: SEO
+        type: object
+        fields:
+          - name: title
+            label: SEO Title
+            type: string
+            required: true
+          - name: description
+            label: SEO Description
+            type: text
+            required: true
+          - name: canonicalUrl
+            label: Canonical URL
+            type: string
+          - name: socialImage
+            label: Social Sharing Image
+            type: image
+            options:
+              media: images
+              path: public/uploads/images
+
+  - name: board
+    label: Board Members
+    type: collection
+    path: src/content/board
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: role
+        label: Board Role
+        type: string
+        required: true
+      - name: professionalTitle
+        label: Professional Title
+        type: string
+      - name: institution
+        label: Institution
+        type: string
+      - name: photo
+        label: Photo
+        type: image
+        options:
+          media: images
+          path: public/uploads/images/board
+      - name: photoAlt
+        label: Photo Alt Text
+        type: string
+      - name: order
+        label: Display Order
+        type: number
+        required: true
+      - name: active
+        label: Show on Website
+        type: boolean
+      - name: body
+        label: Short Biography
+        type: rich-text
+        options:
+          media: false
+
+  - name: resources
+    label: Resources
+    type: collection
+    path: src/content/resources
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: category
+        label: Resource Category
+        type: select
+        required: true
+        options:
+          values:
+            - name: guidelines
+              label: Guidelines
+            - name: lsa-events
+              label: LSA Events
+            - name: university-resources
+              label: University Resources
+            - name: article-of-the-month
+              label: Articles of the Month
+      - name: summary
+        label: Summary
+        type: text
+        required: true
+      - name: date
+        label: Resource Date
+        type: date
+        required: true
+      - name: source
+        label: Source / Publisher
+        type: string
+      - name: externalUrl
+        label: External URL
+        type: string
+      - name: file
+        label: Downloadable File
+        type: file
+        options:
+          media: documents
+          path: public/uploads/documents
+      - name: image
+        label: Image
+        type: image
+        options:
+          media: images
+          path: public/uploads/images/resources
+      - name: imageAlt
+        label: Image Alt Text
+        type: string
+      - name: featured
+        label: Featured
+        type: boolean
+      - name: status
+        label: Publication Status
+        type: select
+        options:
+          values:
+            - name: draft
+              label: Draft
+            - name: published
+              label: Published
+            - name: archived
+              label: Archived
+      - name: order
+        label: Display Order
+        type: number
+      - name: body
+        label: Notes
+        type: rich-text
+        options:
+          media: false

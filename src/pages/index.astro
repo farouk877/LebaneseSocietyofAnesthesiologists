@@ -1,0 +1,295 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import siteJson from '@data/site.json';
+import { siteSchema } from '@utils/siteSchema';
+import SiteFooter from '@components/layout/SiteFooter.astro';
+import SiteHeader from '@components/layout/SiteHeader.astro';
+import { withBase } from '@utils/paths';
+
+const site = siteSchema.parse(siteJson);
+
+const boardMembers = (await getCollection('board'))
+  .filter((member) => member.data.active)
+  .sort((a, b) => a.data.order - b.data.order || a.data.name.localeCompare(b.data.name));
+
+const resourceSections = [
+  {
+    label: 'Guidelines',
+    href: withBase('/guidelines/'),
+    description: 'Clinical guidance and practice resources curated for anesthesiology professionals.'
+  },
+  {
+    label: 'Events',
+    href: withBase('/events/'),
+    description: 'LSA meetings, educational activities, and society events in one place.'
+  },
+  {
+    label: 'University Resources',
+    href: withBase('/university-resources/'),
+    description: 'Academic and institutional teaching resources for trainees and faculty.'
+  },
+  {
+    label: 'Articles',
+    href: withBase('/articles/'),
+    description: 'Articles of the Month, with each selected article available on its own page.'
+  }
+];
+---
+
+<BaseLayout
+  title={site.seo.title}
+  description={site.seo.description}
+  canonicalUrl={site.seo.canonicalUrl}
+  socialImage={site.seo.socialImage}
+>
+  <SiteHeader site={site} home />
+
+  <main id="top" class="bg-lsa-paper pt-[68px]">
+    <section class="relative isolate min-h-[calc(100vh-68px)] overflow-hidden bg-lsa-forest">
+      <img
+        src={withBase(site.hero.image)}
+        alt={site.hero.imageAlt}
+        class="absolute inset-0 h-full w-full object-cover"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-lsa-forest via-lsa-forest/88 to-lsa-forest/20"></div>
+      <div class="relative mx-auto flex min-h-[calc(100vh-68px)] max-w-7xl items-center px-4 py-16 sm:px-6 lg:px-8">
+        <div class="max-w-[20rem] sm:max-w-3xl">
+          <p class="font-sans text-sm font-semibold uppercase tracking-[0.18em] text-lsa-sage">
+            {site.hero.eyebrow}
+          </p>
+          <h1 class="mt-5 text-4xl leading-[1.06] text-white sm:text-6xl lg:text-7xl">
+            {site.hero.heading}
+          </h1>
+          <p class="mt-6 max-w-[20rem] font-sans text-base leading-7 text-lsa-sage sm:max-w-2xl sm:text-xl sm:leading-8">
+            {site.hero.subheading}
+          </p>
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a
+              href={withBase(site.hero.primaryCta.href)}
+              class="rounded-md bg-lsa-leaf px-5 py-3 font-sans text-sm font-semibold text-white no-underline shadow-soft transition hover:bg-lsa-green"
+            >
+              {site.hero.primaryCta.label}
+            </a>
+            {site.hero.secondaryCta && (
+              <a
+                href={withBase(site.hero.secondaryCta.href)}
+                class="rounded-md border border-white/35 bg-white/10 px-5 py-3 font-sans text-sm font-semibold text-white no-underline backdrop-blur transition hover:bg-white/20"
+              >
+                {site.hero.secondaryCta.label}
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="bg-white scroll-mt-24">
+      <div class="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
+        <div>
+          <p class="font-sans text-sm font-semibold uppercase tracking-[0.16em] text-lsa-green">{site.about.eyebrow}</p>
+          <h2 class="mt-4 text-4xl leading-tight text-lsa-forest sm:text-5xl">{site.about.heading}</h2>
+        </div>
+        <div class="space-y-6 text-lg leading-8 text-lsa-muted">
+          {site.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          <div class="grid gap-4 sm:grid-cols-3">
+            {site.about.milestones.map((milestone) => (
+              <div class="rounded-md border border-lsa-line bg-lsa-paper p-5">
+                <p class="font-sans text-xs font-bold uppercase tracking-[0.14em] text-lsa-copper">{milestone.title}</p>
+                <p class="mt-3 text-sm leading-6 text-lsa-muted">{milestone.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="mission" class="scroll-mt-24 border-y border-lsa-line bg-lsa-mist">
+      <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="font-sans text-sm font-semibold uppercase tracking-[0.16em] text-lsa-green">{site.mission.eyebrow}</p>
+          <h2 class="mt-4 text-4xl leading-tight text-lsa-forest sm:text-5xl">{site.mission.heading}</h2>
+        </div>
+        <div class="mt-10 grid gap-5 lg:grid-cols-3">
+          {site.mission.cards.map((card) => (
+            <article class="rounded-md border border-lsa-line bg-white p-6 shadow-soft">
+              <h3 class="text-2xl text-lsa-forest">{card.title}</h3>
+              <p class="mt-4 font-sans text-sm leading-7 text-lsa-muted">
+                {card.description}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="board" class="scroll-mt-24 bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <div class="max-w-3xl">
+            <p class="font-sans text-sm font-semibold uppercase tracking-[0.16em] text-lsa-green">{site.board.eyebrow}</p>
+            <h2 class="mt-4 text-4xl leading-tight text-lsa-forest sm:text-5xl">{site.board.heading}</h2>
+          </div>
+          <p class="max-w-md font-sans text-sm leading-6 text-lsa-muted">
+            {site.board.intro}
+          </p>
+        </div>
+        <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {boardMembers.map((member) => (
+            <article class="rounded-md border border-lsa-line bg-lsa-paper p-5">
+              {member.data.photo ? (
+                <img src={withBase(member.data.photo)} alt={member.data.photoAlt || member.data.name} class="aspect-[4/5] w-full rounded-md object-cover" loading="lazy" />
+              ) : (
+                <div class="aspect-[4/5] rounded-md bg-gradient-to-br from-lsa-sage via-white to-lsa-mist"></div>
+              )}
+              <p class="mt-5 font-sans text-xs font-bold uppercase tracking-[0.14em] text-lsa-copper">{member.data.role}</p>
+              <h3 class="mt-2 text-2xl text-lsa-forest">{member.data.name}</h3>
+              {member.data.professionalTitle && <p class="mt-2 font-sans text-sm font-semibold text-lsa-forest">{member.data.professionalTitle}</p>}
+              {member.data.institution && <p class="mt-1 font-sans text-sm leading-6 text-lsa-muted">{member.data.institution}</p>}
+              {member.body && <p class="mt-3 font-sans text-sm leading-6 text-lsa-muted">{member.body}</p>}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="resources" class="scroll-mt-24 border-y border-lsa-line bg-lsa-paper">
+      <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="font-sans text-sm font-semibold uppercase tracking-[0.16em] text-lsa-green">{site.resources.eyebrow}</p>
+          <h2 class="mt-4 text-4xl leading-tight text-lsa-forest sm:text-5xl">{site.resources.heading}</h2>
+          <p class="mt-5 max-w-2xl font-sans text-base leading-8 text-lsa-muted">{site.resources.intro}</p>
+        </div>
+        <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {resourceSections.map((section) => (
+            <a href={section.href} class="flex min-h-[230px] flex-col rounded-md border border-lsa-line bg-white p-6 no-underline shadow-soft transition hover:border-lsa-green">
+              <h3 class="text-2xl leading-tight text-lsa-forest">{section.label}</h3>
+              <p class="mt-4 flex-1 font-sans text-sm leading-7 text-lsa-muted">{section.description}</p>
+              <span class="mt-6 font-sans text-sm font-semibold text-lsa-green">View {section.label}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="mailing-list" class="scroll-mt-24 bg-lsa-forest">
+      <div class="mx-auto grid max-w-7xl gap-10 px-4 py-20 text-white sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:px-8">
+        <div>
+          <p class="font-sans text-sm font-semibold uppercase tracking-[0.16em] text-lsa-sage">{site.mailingList.eyebrow}</p>
+          <h2 class="mt-4 text-4xl leading-tight sm:text-5xl">{site.mailingList.heading}</h2>
+          <p class="mt-5 max-w-2xl font-sans text-base leading-8 text-lsa-sage">
+            {site.mailingList.description}
+          </p>
+        </div>
+        <form
+          class="mailing-shell relative rounded-md border border-white/15 bg-white p-5 text-lsa-ink shadow-soft"
+          data-endpoint={site.mailingList.endpoint}
+          data-success-message={site.mailingList.successMessage}
+          data-error-message={site.mailingList.errorMessage}
+          data-configuration-message={site.mailingList.configurationMessage}
+          novalidate
+        >
+          <label for="email" class="font-sans text-sm font-semibold text-lsa-forest">Email address</label>
+          <div class="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+            <label for="website">Website</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <div class="mt-3 flex flex-col gap-3 sm:flex-row">
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              placeholder={site.mailingList.placeholderEmail}
+              class="min-h-12 flex-1 rounded-md border border-lsa-line px-4 font-sans text-base"
+            />
+            <button type="submit" class="min-h-12 rounded-md bg-lsa-green px-5 font-sans text-sm font-semibold text-white transition hover:bg-lsa-forest">
+              {site.mailingList.buttonLabel}
+            </button>
+          </div>
+          <label class="mt-4 flex gap-3 font-sans text-sm leading-6 text-lsa-muted">
+            <input
+              id="mailing-consent"
+              name="consent"
+              type="checkbox"
+              required
+              class="mt-1 h-4 w-4 rounded border-lsa-line text-lsa-green"
+            />
+            <span>{site.mailingList.consentLabel}</span>
+          </label>
+          <p class="mailing-shell-status mt-3 min-h-6 font-sans text-sm text-lsa-muted" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter site={site} />
+
+  <script>
+    const mailingForm = document.querySelector<HTMLFormElement>('.mailing-shell');
+    const mailingStatus = document.querySelector<HTMLElement>('.mailing-shell-status');
+    const mailingButton = mailingForm?.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const mailingEmail = mailingForm?.querySelector<HTMLInputElement>('input[name="email"]');
+    const mailingConsent = mailingForm?.querySelector<HTMLInputElement>('input[name="consent"]');
+    const mailingHoneypot = mailingForm?.querySelector<HTMLInputElement>('input[name="website"]');
+
+    const setMailingStatus = (message: string) => {
+      if (mailingStatus) {
+        mailingStatus.textContent = message;
+      }
+    };
+
+    mailingForm?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const endpoint = mailingForm.dataset.endpoint;
+      if (!endpoint) {
+        setMailingStatus(mailingForm.dataset.configurationMessage || 'Mailing-list signup is not connected yet.');
+        return;
+      }
+
+      if (!mailingEmail?.validity.valid) {
+        setMailingStatus('Enter a valid email address.');
+        mailingEmail?.focus();
+        return;
+      }
+
+      if (!mailingConsent?.checked) {
+        setMailingStatus('Please confirm consent to join the mailing list.');
+        mailingConsent?.focus();
+        return;
+      }
+
+      const body = new URLSearchParams({
+        email: mailingEmail.value,
+        consent: 'true',
+        source: 'lsa-website',
+        website: mailingHoneypot?.value || ''
+      });
+
+      mailingButton?.setAttribute('disabled', 'true');
+      setMailingStatus('Submitting...');
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body
+        });
+        const payload = await response.json().catch(() => null);
+
+        if (!response.ok || payload?.ok === false) {
+          throw new Error(payload?.error || 'submission_failed');
+        }
+
+        mailingForm.reset();
+        setMailingStatus(mailingForm.dataset.successMessage || 'Thank you. Your email has been submitted.');
+      } catch {
+        setMailingStatus(mailingForm.dataset.errorMessage || 'We could not submit your email right now. Please try again later.');
+      } finally {
+        mailingButton?.removeAttribute('disabled');
+      }
+    });
+  </script>
+</BaseLayout>

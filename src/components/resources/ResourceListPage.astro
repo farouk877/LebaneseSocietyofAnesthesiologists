@@ -1,0 +1,95 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SiteFooter from '@components/layout/SiteFooter.astro';
+import SiteHeader from '@components/layout/SiteHeader.astro';
+import { getResourceHref, getResourceLinkLabel } from '@utils/resources';
+import { withBase } from '@utils/paths';
+import type { CollectionEntry } from 'astro:content';
+import type { SiteSettings } from '@utils/siteSchema';
+
+interface Props {
+  site: SiteSettings;
+  title: string;
+  eyebrow: string;
+  description: string;
+  canonicalPath: string;
+  resources: CollectionEntry<'resources'>[];
+  showEventTiming?: boolean;
+}
+
+const { site, title, eyebrow, description, canonicalPath, resources, showEventTiming = false } = Astro.props;
+const canonicalBase = site.seo.canonicalUrl.replace(/\/$/, '');
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric'
+});
+const today = new Date();
+---
+
+<BaseLayout
+  title={`${title} | ${site.societyName}`}
+  description={description}
+  canonicalUrl={`${canonicalBase}${canonicalPath}`}
+  socialImage={site.seo.socialImage}
+>
+  <SiteHeader site={site} />
+  <main class="min-h-screen bg-lsa-paper pt-[68px]">
+    <section class="border-b border-lsa-line bg-white">
+      <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+        <a href={withBase('/#resources')} class="font-sans text-sm font-semibold text-lsa-green underline">Back to resources</a>
+        <p class="mt-10 font-sans text-sm font-semibold uppercase tracking-[0.16em] text-lsa-green">{eyebrow}</p>
+        <h1 class="mt-4 text-5xl leading-tight text-lsa-forest sm:text-6xl">{title}</h1>
+        <p class="mt-5 max-w-2xl font-sans text-base leading-8 text-lsa-muted">{description}</p>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
+      {resources.length ? (
+        <div class="grid gap-5">
+          {resources.map((resource) => {
+            const href = getResourceHref(resource);
+            const label = getResourceLinkLabel(resource);
+            const isExternal = href.startsWith('http');
+            const resourceHref = isExternal ? href : withBase(href);
+            const eventTiming = showEventTiming ? (resource.data.date >= today ? 'Upcoming' : 'Past') : '';
+
+            return (
+              <article class="rounded-md border border-lsa-line bg-white p-6 shadow-soft">
+                <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <p class="font-sans text-sm font-semibold text-lsa-muted">{dateFormatter.format(resource.data.date)}</p>
+                  <div class="flex flex-wrap gap-2">
+                    {eventTiming && <span class="w-fit rounded-md bg-lsa-mist px-2 py-1 font-sans text-xs font-semibold text-lsa-green">{eventTiming}</span>}
+                    {resource.data.featured && <span class="w-fit rounded-md bg-lsa-mist px-2 py-1 font-sans text-xs font-semibold text-lsa-green">Featured</span>}
+                  </div>
+                </div>
+                <h2 class="mt-4 text-3xl leading-tight text-lsa-forest">{resource.data.title}</h2>
+                <p class="mt-4 font-sans text-base leading-8 text-lsa-muted">{resource.data.summary}</p>
+                <div class="mt-6 flex flex-wrap items-center gap-4">
+                  <span class="font-sans text-sm font-semibold text-lsa-green">{resource.data.source || 'LSA'}</span>
+                  {href ? (
+                    <a
+                      href={resourceHref}
+                      class="font-sans text-sm font-semibold text-lsa-forest underline"
+                      target={isExternal ? '_blank' : undefined}
+                      rel={isExternal ? 'noreferrer' : undefined}
+                    >
+                      {label}
+                    </a>
+                  ) : (
+                    <span class="font-sans text-sm text-lsa-muted">Link pending</span>
+                  )}
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      ) : (
+        <div class="rounded-md border border-lsa-line bg-white p-6 font-sans text-sm leading-7 text-lsa-muted">
+          No published resources are available yet.
+        </div>
+      )}
+    </section>
+  </main>
+  <SiteFooter site={site} />
+</BaseLayout>

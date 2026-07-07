@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  @apply overflow-x-hidden bg-white font-serif text-lsa-ink antialiased;
+}
+
+a {
+  @apply underline-offset-4;
+}
+
+:focus-visible {
+  @apply outline outline-2 outline-offset-4 outline-lsa-green;
+}
+
+.mobile-nav[data-open='true'] {
+  display: grid;
+}
+
+@media (min-width: 1024px) {
+  .mobile-nav[data-open='true'] {
+    display: none;
+  }
+}
+
+.article-body > * + * {
+  @apply mt-5;
+}
+
+.article-body h2 {
+  @apply mt-10 text-3xl leading-tight text-lsa-forest;
+}
+
+.article-body h3 {
+  @apply mt-8 text-2xl leading-tight text-lsa-forest;
+}
+
+.article-body ul,
+.article-body ol {
+  @apply pl-6;
+}
+
+.article-body ul {
+  @apply list-disc;
+}
+
+.article-body ol {
+  @apply list-decimal;
+}
+
+.article-body a {
+  @apply font-semibold text-lsa-green underline;
+}

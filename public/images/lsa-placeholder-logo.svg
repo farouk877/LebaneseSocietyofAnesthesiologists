@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title desc">
+  <title id="title">Temporary LSA placeholder logo</title>
+  <desc id="desc">A temporary green cedar and medical society mark.</desc>
+  <rect width="96" height="96" rx="18" fill="#123d2f"/>
+  <path d="M48 17 31 42h10L26 63h17v16h10V63h17L55 42h10L48 17Z" fill="#dfeadf"/>
+  <path d="M28 72h40" stroke="#9a6634" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="48" cy="48" r="30" fill="none" stroke="#5f8f49" stroke-width="3" opacity=".75"/>
+</svg>

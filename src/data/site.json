@@ -1,0 +1,123 @@
+{
+  "societyName": "Lebanese Society of Anesthesiologists",
+  "logo": {
+    "src": "/images/lsa-placeholder-logo.svg",
+    "alt": "Temporary LSA logo"
+  },
+  "hero": {
+    "eyebrow": "Development visual prototype",
+    "heading": "Lebanese Society of Anesthesiologists",
+    "subheading": "Placeholder copy for a professional medical society website centered on education, clinical excellence, and academic anesthesiology in Lebanon.",
+    "image": "/images/lsa-hero-placeholder.png",
+    "imageAlt": "Generated placeholder visual of an anesthesiology workspace",
+    "primaryCta": {
+      "label": "Explore Resources",
+      "href": "#resources"
+    },
+    "secondaryCta": {
+      "label": "Join Mailing List",
+      "href": "#mailing-list"
+    }
+  },
+  "navigation": [
+    {
+      "label": "About",
+      "href": "#about"
+    },
+    {
+      "label": "Guidelines",
+      "href": "/guidelines/"
+    },
+    {
+      "label": "Events",
+      "href": "/events/"
+    },
+    {
+      "label": "University Resources",
+      "href": "/university-resources/"
+    },
+    {
+      "label": "Articles",
+      "href": "/articles/"
+    },
+    {
+      "label": "Join Mailing List",
+      "href": "#mailing-list"
+    }
+  ],
+  "about": {
+    "eyebrow": "About LSA",
+    "heading": "A society for anesthesiology practice, education, and collaboration.",
+    "paragraphs": [
+      "Development placeholder for the society history. This section will later be backed by CMS-managed content so LSA can update the story, founding details, and milestones without editing code."
+    ],
+    "milestones": [
+      {
+        "title": "History",
+        "description": "Placeholder milestone content."
+      },
+      {
+        "title": "Education",
+        "description": "Placeholder milestone content."
+      },
+      {
+        "title": "Standards",
+        "description": "Placeholder milestone content."
+      }
+    ]
+  },
+  "mission": {
+    "eyebrow": "Mission & Vision",
+    "heading": "Advancing safe, thoughtful anesthesiology care.",
+    "cards": [
+      {
+        "title": "Mission",
+        "description": "Development placeholder for approved LSA language. Final text will be editable through the content model."
+      },
+      {
+        "title": "Vision",
+        "description": "Development placeholder for approved LSA language. Final text will be editable through the content model."
+      },
+      {
+        "title": "Values",
+        "description": "Development placeholder for approved LSA language. Final text will be editable through the content model."
+      }
+    ]
+  },
+  "board": {
+    "eyebrow": "Board",
+    "heading": "Current leadership",
+    "intro": "Board names, roles, photos, institutions, and ordering are CMS-managed."
+  },
+  "resources": {
+    "eyebrow": "Resources",
+    "heading": "Guidelines, events, academic material, and selected articles.",
+    "intro": "Choose a resource area to browse dedicated guidance, events, university material, or selected monthly articles."
+  },
+  "mailingList": {
+    "eyebrow": "Mailing List",
+    "heading": "Stay connected with LSA updates.",
+    "description": "Receive occasional updates from the Lebanese Society of Anesthesiologists about society news, events, resources, and announcements.",
+    "buttonLabel": "Join",
+    "placeholderEmail": "name@example.org",
+    "endpoint": "https://script.google.com/macros/s/AKfycbxXQHW8APoi9oRRwU5G0sMzYfJXWdwyxYwUszbjOcowmMp_iBMYMeKoJRyh5SXUpcg/exec",
+    "consentLabel": "I agree to receive email updates from the Lebanese Society of Anesthesiologists.",
+    "successMessage": "Thank you. Your email has been submitted.",
+    "errorMessage": "We could not submit your email right now. Please try again later.",
+    "configurationMessage": "Mailing-list signup is not connected yet."
+  },
+  "contact": {
+    "email": "",
+    "address": ""
+  },
+  "socialLinks": [],
+  "footer": {
+    "text": "Development footer placeholder pending approved contact details."
+  },
+  "seo": {
+    "title": "Lebanese Society of Anesthesiologists",
+    "description": "Visual prototype for the Lebanese Society of Anesthesiologists website.",
+    "canonicalUrl": "https://farouk877.github.io/LebaneseSocietyofAnesthesiologists",
+    "socialImage": "/images/lsa-hero-placeholder.png"
+  }
+}

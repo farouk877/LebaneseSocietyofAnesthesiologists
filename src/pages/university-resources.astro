@@ -1,0 +1,20 @@
+---
+import ResourceListPage from '@components/resources/ResourceListPage.astro';
+import { getCollection } from 'astro:content';
+import siteJson from '@data/site.json';
+import { siteSchema } from '@utils/siteSchema';
+
+const site = siteSchema.parse(siteJson);
+const resources = (await getCollection('resources'))
+  .filter((resource) => resource.data.status === 'published' && resource.data.category === 'university-resources')
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<ResourceListPage
+  site={site}
+  title="University Resources"
+  eyebrow="University Resources"
+  description="Academic and institutional teaching resources for trainees and faculty."
+  canonicalPath="/university-resources/"
+  resources={resources}
+/>

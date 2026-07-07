@@ -1,0 +1,69 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SiteFooter from '@components/layout/SiteFooter.astro';
+import SiteHeader from '@components/layout/SiteHeader.astro';
+import { getCollection, render } from 'astro:content';
+import siteJson from '@data/site.json';
+import { siteSchema } from '@utils/siteSchema';
+import { withBase } from '@utils/paths';
+
+export async function getStaticPaths() {
+  const articles = (await getCollection('resources'))
+    .filter((resource) => resource.data.status === 'published' && resource.data.category === 'article-of-the-month');
+
+  return articles.map((article) => ({
+    params: { id: article.id },
+    props: { article }
+  }));
+}
+
+const site = siteSchema.parse(siteJson);
+const { article } = Astro.props;
+const { Content } = await render(article);
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric'
+});
+const canonicalBase = site.seo.canonicalUrl.replace(/\/$/, '');
+---
+
+<BaseLayout
+  title={`${article.data.title} | ${site.societyName}`}
+  description={article.data.summary}
+  canonicalUrl={`${canonicalBase}/articles/${article.id}/`}
+  socialImage={article.data.image || site.seo.socialImage}
+>
+  <SiteHeader site={site} />
+  <main class="min-h-screen bg-white pt-[68px]">
+    <article>
+      <header class="border-b border-lsa-line bg-lsa-paper">
+        <div class="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
+          <a href={withBase('/articles/')} class="font-sans text-sm font-semibold text-lsa-green underline">Back to all articles</a>
+          <p class="mt-10 font-sans text-sm font-semibold uppercase tracking-[0.16em] text-lsa-copper">Article of the Month</p>
+          <h1 class="mt-4 text-4xl leading-tight text-lsa-forest sm:text-6xl">{article.data.title}</h1>
+          <p class="mt-5 font-sans text-base font-semibold text-lsa-muted">{dateFormatter.format(article.data.date)}</p>
+          <p class="mt-5 font-sans text-lg leading-8 text-lsa-muted">{article.data.summary}</p>
+          <div class="mt-6 flex flex-wrap items-center gap-4">
+            <span class="font-sans text-sm font-semibold text-lsa-green">{article.data.source || 'LSA'}</span>
+            {article.data.externalUrl && (
+              <a href={article.data.externalUrl} target="_blank" rel="noreferrer" class="font-sans text-sm font-semibold text-lsa-forest underline">
+                Open source article
+              </a>
+            )}
+          </div>
+        </div>
+      </header>
+
+      <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+        <div class="article-body font-sans text-base leading-8 text-lsa-ink">
+          <Content />
+        </div>
+        <a href={withBase('/articles/')} class="mt-10 inline-flex rounded-md border border-lsa-line bg-white px-5 py-3 font-sans text-sm font-semibold text-lsa-forest no-underline transition hover:border-lsa-green">
+          Back to all articles
+        </a>
+      </div>
+    </article>
+  </main>
+  <SiteFooter site={site} />
+</BaseLayout>
