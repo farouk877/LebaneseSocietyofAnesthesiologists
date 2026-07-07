@@ -1,6 +1,12 @@
 media:
+  - name: siteImages
+    label: Site Images
+    input: public/images
+    output: /images
+    rename: safe
+    extensions: [png, jpg, jpeg, webp, svg]
   - name: images
-    label: Images
+    label: Uploaded Images
     input: public/uploads/images
     output: /uploads/images
     rename: safe
@@ -32,8 +38,8 @@ content:
             type: image
             required: true
             options:
-              media: images
-              path: public/uploads/images
+              media: siteImages
+              path: public/images
           - name: alt
             label: Logo Alt Text
             type: string
@@ -56,8 +62,8 @@ content:
             label: Hero Image
             type: image
             options:
-              media: images
-              path: public/uploads/images
+              media: siteImages
+              path: public/images
           - name: imageAlt
             label: Hero Image Alt Text
             type: string
@@ -281,8 +287,8 @@ content:
             label: Social Sharing Image
             type: image
             options:
-              media: images
-              path: public/uploads/images
+              media: siteImages
+              path: public/images
 
   - name: board
     label: Board Members

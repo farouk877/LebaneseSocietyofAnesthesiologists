@@ -94,12 +94,15 @@ Important fields:
 
 Pages CMS uploads are organized into:
 
+- `public/images`
 - `public/uploads/images`
 - `public/uploads/images/board`
 - `public/uploads/images/resources`
 - `public/uploads/documents`
 
 Files in `public/` are served from the site root. For example, an uploaded board image under `public/uploads/images/board/name.jpg` is referenced as `/uploads/images/board/name.jpg`.
+
+Logo, hero, and social sharing images use the `Site Images` media source, which maps `public/images` to `/images`. Board/resource uploads use the uploaded image folders under `public/uploads/images`.
 
 ## Validation
 
