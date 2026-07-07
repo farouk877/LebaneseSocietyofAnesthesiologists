@@ -212,12 +212,18 @@ content:
         label: Contact Information
         type: object
         fields:
+          - name: organization
+            label: Organization
+            type: string
           - name: email
             label: Contact Email
             type: string
           - name: address
             label: Address
             type: text
+          - name: phone
+            label: Phone
+            type: string
       - name: socialLinks
         label: Social Links
         type: object
@@ -236,6 +242,23 @@ content:
         label: Footer
         type: object
         fields:
+          - name: missionStatement
+            label: Mission Statement
+            type: text
+          - name: quickLinks
+            label: Quick Links
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{label}"
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: href
+                label: Link
+                type: string
           - name: text
             label: Footer Text
             type: text

@@ -9,12 +9,52 @@ interface Props {
 const { site } = Astro.props;
 ---
 
-<footer class="bg-white">
-  <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
-    <a href={withBase('/')} class="flex items-center gap-3 no-underline">
-      <img src={withBase(site.logo.src)} alt="" class="h-10 w-10 rounded-md" />
-      <span class="text-lg font-semibold text-lsa-forest">{site.societyName}</span>
-    </a>
-    <p class="font-sans text-sm text-lsa-muted">{site.footer.text}</p>
+<footer class="border-t border-lsa-line bg-white">
+  <div class="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.2fr_0.8fr_0.9fr] lg:px-8">
+    <div>
+      <a href={withBase('/')} class="flex items-center gap-3 no-underline">
+        <img src={withBase(site.logo.src)} alt="" class="h-10 w-10 rounded-md" />
+        <span class="text-lg font-semibold leading-6 text-lsa-forest">{site.societyName}</span>
+      </a>
+      <p class="mt-5 max-w-md font-sans text-sm leading-7 text-lsa-muted">{site.footer.missionStatement}</p>
+    </div>
+
+    <nav aria-label="Footer quick links">
+      <h2 class="font-sans text-sm font-bold uppercase tracking-[0.14em] text-lsa-forest">Quick Links</h2>
+      <ul class="mt-4 space-y-2 font-sans text-sm">
+        {site.footer.quickLinks.map((link) => (
+          <li>
+            <a href={withBase(link.href)} class="text-lsa-muted no-underline transition hover:text-lsa-green hover:underline">
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <address class="not-italic">
+      <h2 class="font-sans text-sm font-bold uppercase tracking-[0.14em] text-lsa-forest">Contact</h2>
+      <div class="mt-4 space-y-2 font-sans text-sm leading-6 text-lsa-muted">
+        <p class="font-semibold text-lsa-forest">{site.contact.organization}</p>
+        <p>{site.contact.address}</p>
+        <p>
+          <a href={`mailto:${site.contact.email}`} class="text-lsa-muted no-underline transition hover:text-lsa-green hover:underline">
+            {site.contact.email}
+          </a>
+        </p>
+        <p>
+          <a href={`tel:${site.contact.phone.replace(/[^\d+]/g, '')}`} class="text-lsa-muted no-underline transition hover:text-lsa-green hover:underline">
+            {site.contact.phone}
+          </a>
+        </p>
+      </div>
+    </address>
+  </div>
+
+  <div class="border-t border-lsa-line">
+    <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-5 font-sans text-xs text-lsa-muted sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
+      <p>{site.footer.text}</p>
+      <p>&copy; {new Date().getFullYear()} {site.societyName}</p>
+    </div>
   </div>
 </footer>

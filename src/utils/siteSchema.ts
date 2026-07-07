@@ -60,11 +60,15 @@ export const siteSchema = z.object({
     configurationMessage: z.string().min(1)
   }),
   contact: z.object({
+    organization: z.string().min(1),
     email: z.string(),
-    address: z.string()
+    address: z.string(),
+    phone: z.string()
   }),
   socialLinks: z.array(linkSchema),
   footer: z.object({
+    missionStatement: z.string().min(1),
+    quickLinks: z.array(linkSchema).min(1),
     text: z.string().min(1)
   }),
   seo: z.object({

@@ -16,7 +16,7 @@ Edit `Site Settings` for normal homepage copy:
 - Mailing-list section copy
 - Mailing-list Google Apps Script Web App URL and consent wording
 - Contact information
-- Footer text
+- Footer mission statement, quick links, and text
 - SEO title, description, canonical URL, and social image
 
 Routine edits to these fields should not require touching `.astro`, TypeScript, Tailwind, or build files.
@@ -78,6 +78,17 @@ Important fields:
 Current consent text is generic and temporary: `I agree to receive email updates from the Lebanese Society of Anesthesiologists.`
 
 The Google Sheet backend stores timestamp, email, normalized email, consent, and source. It does not store browser user agent.
+
+## Footer
+
+The footer is managed in `Site Settings`.
+
+Important fields:
+
+- `Contact Information`: organization, address, email, and phone number shown in the footer contact column.
+- `Footer Mission Statement`: short statement shown below the logo.
+- `Footer Quick Links`: links shown in the footer navigation column.
+- `Footer Text`: small bottom-row text.
 
 ## Media
 

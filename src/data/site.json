@@ -7,7 +7,7 @@
   "hero": {
     "eyebrow": "Development visual prototype",
     "heading": "Lebanese Society of Anesthesiologists",
-    "subheading": "Placeholder copy for a professional medical society website centered on education, clinical excellence, and academic anesthesiology in Lebanon.",
+    "subheading": "Advancing the practice of anesthesiology through education, research, and professional excellence in Lebanon and the region.",
     "image": "/images/lsa-hero-placeholder.png",
     "imageAlt": "Generated placeholder visual of an anesthesiology workspace",
     "primaryCta": {
@@ -72,7 +72,7 @@
     "cards": [
       {
         "title": "Mission",
-        "description": "Development placeholder for approved LSA language. Final text will be editable through the content model."
+        "description": "Advancing the practice of anesthesiology through education, research, and professional excellence in Lebanon and the region."
       },
       {
         "title": "Vision",
@@ -107,12 +107,41 @@
     "configurationMessage": "Mailing-list signup is not connected yet."
   },
   "contact": {
-    "email": "",
-    "address": ""
+    "organization": "Lebanese Order of Physicians",
+    "address": "Floor 3, Tahwita, Beirut 50-501, Lebanon",
+    "email": "info@lsa-lebanon.org",
+    "phone": "+961 01 610 710"
   },
   "socialLinks": [],
   "footer": {
-    "text": "Development footer placeholder pending approved contact details."
+    "missionStatement": "Advancing the practice of anesthesiology through education, research, and professional excellence in Lebanon and the region.",
+    "quickLinks": [
+      {
+        "label": "About",
+        "href": "/#about"
+      },
+      {
+        "label": "Guidelines",
+        "href": "/guidelines/"
+      },
+      {
+        "label": "Events",
+        "href": "/events/"
+      },
+      {
+        "label": "University Resources",
+        "href": "/university-resources/"
+      },
+      {
+        "label": "Articles",
+        "href": "/articles/"
+      },
+      {
+        "label": "Join Mailing List",
+        "href": "/#mailing-list"
+      }
+    ],
+    "text": "Lebanese Society of Anesthesiologists."
   },
   "seo": {
     "title": "Lebanese Society of Anesthesiologists",
