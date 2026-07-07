@@ -1,5 +1,6 @@
 ---
 import '@styles/global.css';
+import { withBase } from '@utils/paths';
 
 interface Props {
   title: string;
@@ -9,6 +10,11 @@ interface Props {
 }
 
 const { title, description, canonicalUrl, socialImage } = Astro.props;
+const socialImageUrl = socialImage
+  ? socialImage.startsWith('http')
+    ? socialImage
+    : new URL(withBase(socialImage), Astro.url.origin).toString()
+  : undefined;
 ---
 
 <!doctype html>
@@ -22,9 +28,9 @@ const { title, description, canonicalUrl, socialImage } = Astro.props;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
-    {socialImage && <meta property="og:image" content={socialImage} />}
+    {socialImageUrl && <meta property="og:image" content={socialImageUrl} />}
     <meta name="twitter:card" content="summary_large_image" />
-    {socialImage && <meta name="twitter:image" content={socialImage} />}
+    {socialImageUrl && <meta name="twitter:image" content={socialImageUrl} />}
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>

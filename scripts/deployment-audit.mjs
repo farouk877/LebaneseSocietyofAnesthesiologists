@@ -43,6 +43,12 @@ if (!existsSync(distDir)) {
     for (const src of extractAttributeValues(html, 'src')) {
       auditUrl(src, rel, builtPaths, assetPaths);
     }
+
+    for (const content of extractAttributeValues(html, 'content')) {
+      if (looksLikeUrl(content)) {
+        auditUrl(content, rel, builtPaths, assetPaths);
+      }
+    }
   }
 
   const homeHtmlPath = join(distDir, 'index.html');
@@ -154,4 +160,15 @@ function stripBasePath(path) {
   }
 
   return path;
+}
+
+function looksLikeUrl(value) {
+  return (
+    value.startsWith('/') ||
+    value.startsWith('http://') ||
+    value.startsWith('https://') ||
+    value.startsWith('mailto:') ||
+    value.startsWith('tel:') ||
+    value.startsWith('data:')
+  );
 }
