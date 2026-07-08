@@ -12,7 +12,7 @@ const textCardSchema = z.object({
 
 const presidentMessageSchema = z.object({
   eyebrow: z.string().min(1),
-  heading: z.string().min(1),
+  heading: z.string(),
   body: z.array(z.string().min(1)).min(1),
   signerName: z.string().min(1),
   signerTitle: z.string(),
@@ -51,12 +51,12 @@ export const siteSchema = z.object({
   board: z.object({
     eyebrow: z.string().min(1),
     heading: z.string().min(1),
-    intro: z.string().min(1)
+    intro: z.string()
   }),
   resources: z.object({
     eyebrow: z.string().min(1),
-    heading: z.string().min(1),
-    intro: z.string().min(1)
+    heading: z.string(),
+    intro: z.string()
   }),
   mailingList: z.object({
     eyebrow: z.string().min(1),

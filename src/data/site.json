@@ -5,7 +5,7 @@
     "alt": "Temporary LSA logo"
   },
   "hero": {
-    "eyebrow": "Development visual prototype",
+    "eyebrow": "Lebanese Society of Anesthesiologists",
     "heading": "Lebanese Society of Anesthesiologists",
     "subheading": "Advancing the practice of anesthesiology through education, research, and professional excellence in Lebanon and the region.",
     "image": "/images/lsa-hero-placeholder.png",
@@ -49,20 +49,20 @@
     "eyebrow": "About LSA",
     "heading": "A society for anesthesiology practice, education, and collaboration.",
     "paragraphs": [
-      "Development placeholder for the society history. This section will later be backed by CMS-managed content so LSA can update the story, founding details, and milestones without editing code."
+      "The Lebanese Society of Anesthesiologists supports anesthesiology professionals across Lebanon through education, scientific exchange, professional collaboration, and a shared commitment to patient safety."
     ],
     "milestones": [
       {
-        "title": "History",
-        "description": "Placeholder milestone content."
+        "title": "Community",
+        "description": "Connecting anesthesiologists across institutions and career stages."
       },
       {
         "title": "Education",
-        "description": "Placeholder milestone content."
+        "description": "Supporting lifelong learning through meetings, resources, and academic exchange."
       },
       {
         "title": "Standards",
-        "description": "Placeholder milestone content."
+        "description": "Promoting excellence, safety, and quality in anesthesiology practice."
       }
     ]
   },
@@ -86,7 +86,7 @@
   },
   "presidentMessage": {
     "eyebrow": "Message from the President",
-    "heading": "A productive and impactful 2026-2028 term.",
+    "heading": "",
     "body": [
       "Dear Members of the Lebanese Society of Anesthesiologists,",
       "On behalf of the LSA Board, I would like to reaffirm our commitment to a productive and impactful 2026-2028 term. We recently held our first Board meeting, during which we discussed the strategic directions and priorities that will guide our work over the next two years.",
@@ -103,12 +103,12 @@
   "board": {
     "eyebrow": "Board",
     "heading": "Current leadership",
-    "intro": "Board names, roles, photos, institutions, and ordering are CMS-managed."
+    "intro": ""
   },
   "resources": {
     "eyebrow": "Resources",
-    "heading": "Guidelines, events, academic material, and selected articles.",
-    "intro": "Choose a resource area to browse dedicated guidance, events, university material, or selected monthly articles."
+    "heading": "",
+    "intro": ""
   },
   "mailingList": {
     "eyebrow": "Mailing List",
@@ -161,7 +161,7 @@
   },
   "seo": {
     "title": "Lebanese Society of Anesthesiologists",
-    "description": "Visual prototype for the Lebanese Society of Anesthesiologists website.",
+    "description": "Official website of the Lebanese Society of Anesthesiologists.",
     "canonicalUrl": "https://farouk877.github.io/LebaneseSocietyofAnesthesiologists",
     "socialImage": "/images/lsa-hero-placeholder.png"
   }
