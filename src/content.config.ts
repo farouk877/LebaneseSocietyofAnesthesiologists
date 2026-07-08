@@ -16,8 +16,11 @@ const board = defineCollection({
   schema: z.object({
     name: z.string().min(1),
     role: z.string().min(1),
+    specialty: z.string().optional(),
     professionalTitle: z.string().optional(),
     institution: z.string().optional(),
+    email: z.union([z.email(), z.literal('')]).optional(),
+    linkedinUrl: z.union([z.url(), z.literal('')]).optional(),
     photo: z.string().optional(),
     photoAlt: z.string().optional(),
     order: z.number().int().nonnegative().default(0),

@@ -153,6 +153,38 @@ content:
               - name: description
                 label: Description
                 type: text
+      - name: presidentMessage
+        label: President Message
+        type: object
+        fields:
+          - name: eyebrow
+            label: Section Label
+            type: string
+          - name: heading
+            label: Heading
+            type: string
+            required: true
+          - name: body
+            label: Message Paragraphs
+            type: text
+            list: true
+            required: true
+          - name: signerName
+            label: Signer Name
+            type: string
+            required: true
+          - name: signerTitle
+            label: Signer Title
+            type: string
+          - name: image
+            label: President Photo
+            type: image
+            options:
+              media: images
+              path: public/uploads/images/board
+          - name: imageAlt
+            label: President Photo Alt Text
+            type: string
       - name: board
         label: Board Section
         type: object
@@ -303,11 +335,20 @@ content:
         label: Board Role
         type: string
         required: true
+      - name: specialty
+        label: Specialty
+        type: string
       - name: professionalTitle
         label: Professional Title
         type: string
       - name: institution
         label: Institution
+        type: string
+      - name: email
+        label: Email
+        type: string
+      - name: linkedinUrl
+        label: LinkedIn URL
         type: string
       - name: photo
         label: Photo
@@ -326,7 +367,7 @@ content:
         label: Show on Website
         type: boolean
       - name: body
-        label: Short Biography
+        label: Full Biography
         type: rich-text
         options:
           media: false

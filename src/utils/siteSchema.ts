@@ -10,6 +10,16 @@ const textCardSchema = z.object({
   description: z.string().min(1)
 });
 
+const presidentMessageSchema = z.object({
+  eyebrow: z.string().min(1),
+  heading: z.string().min(1),
+  body: z.array(z.string().min(1)).min(1),
+  signerName: z.string().min(1),
+  signerTitle: z.string(),
+  image: z.string().min(1),
+  imageAlt: z.string().min(1)
+});
+
 export const siteSchema = z.object({
   societyName: z.string().min(1),
   logo: z.object({
@@ -37,6 +47,7 @@ export const siteSchema = z.object({
     heading: z.string().min(1),
     cards: z.array(textCardSchema).min(1)
   }),
+  presidentMessage: presidentMessageSchema,
   board: z.object({
     eyebrow: z.string().min(1),
     heading: z.string().min(1),

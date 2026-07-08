@@ -84,6 +84,22 @@
       }
     ]
   },
+  "presidentMessage": {
+    "eyebrow": "Message from the President",
+    "heading": "A productive and impactful 2026-2028 term.",
+    "body": [
+      "Dear Members of the Lebanese Society of Anesthesiologists,",
+      "On behalf of the LSA Board, I would like to reaffirm our commitment to a productive and impactful 2026-2028 term. We recently held our first Board meeting, during which we discussed the strategic directions and priorities that will guide our work over the next two years.",
+      "It is a privilege to serve the mission and vision of the Lebanese Society of Anesthesiologists, building on the strong foundation laid by our predecessors. We remain committed to advancing the practice of anesthesiology and promoting the highest standards of patient care through education, research, collaboration, and innovation.",
+      "Over the next two years, our efforts will focus on strengthening communication through a dynamic digital presence, expanding educational opportunities across all career stages, and fostering a vibrant and connected professional community. We will continue to promote scientific excellence through national and regional meetings, while deepening our international collaborations to align with global standards and advances in our specialty.",
+      "Equally important, we are committed to supporting our members, engaging residents and young anesthesiologists, and advancing quality and patient safety across all areas of practice, despite the challenges we continue to face.",
+      "Together, we will build on our collective strengths to help shape the future of anesthesiology in Lebanon and contribute meaningfully to the global anesthesiology community."
+    ],
+    "signerName": "Marie Aouad, MD",
+    "signerTitle": "President, Lebanese Society of Anesthesiologists",
+    "image": "/uploads/images/board/marie-aouad.jpeg",
+    "imageAlt": "Marie Aouad, President of the Lebanese Society of Anesthesiologists"
+  },
   "board": {
     "eyebrow": "Board",
     "heading": "Current leadership",

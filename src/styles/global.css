@@ -29,6 +29,11 @@ a {
   display: grid;
 }
 
+.board-bio-dialog::backdrop {
+  background: rgb(23 44 35 / 0.62);
+  backdrop-filter: blur(3px);
+}
+
 @media (min-width: 1024px) {
   .mobile-nav[data-open='true'] {
     display: none;

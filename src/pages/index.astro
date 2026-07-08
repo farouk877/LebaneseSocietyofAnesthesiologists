@@ -13,6 +13,13 @@ const boardMembers = (await getCollection('board'))
   .filter((member) => member.data.active)
   .sort((a, b) => a.data.order - b.data.order || a.data.name.localeCompare(b.data.name));
 
+const getBioParagraphs = (body: string) =>
+  body
+    .trim()
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+
 const resourceSections = [
   {
     label: 'Guidelines',
@@ -106,21 +113,32 @@ const resourceSections = [
     </section>
 
     <section id="mission" class="scroll-mt-24 border-y border-lsa-line bg-lsa-mist">
-      <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div class="max-w-3xl">
-          <p class="font-sans text-sm font-semibold uppercase tracking-[0.16em] text-lsa-green">{site.mission.eyebrow}</p>
-          <h2 class="mt-4 text-4xl leading-tight text-lsa-forest sm:text-5xl">{site.mission.heading}</h2>
+      <div class="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8">
+        <div>
+          <p class="font-sans text-sm font-semibold uppercase tracking-[0.16em] text-lsa-green">{site.presidentMessage.eyebrow}</p>
+          <h2 class="mt-4 text-4xl leading-tight text-lsa-forest sm:text-5xl">{site.presidentMessage.heading}</h2>
+          <div class="mt-8 overflow-hidden rounded-md border border-lsa-line bg-white shadow-soft">
+            <img
+              src={withBase(site.presidentMessage.image)}
+              alt={site.presidentMessage.imageAlt}
+              class="aspect-[4/5] w-full object-cover"
+              loading="lazy"
+            />
+          </div>
         </div>
-        <div class="mt-10 grid gap-5 lg:grid-cols-3">
-          {site.mission.cards.map((card) => (
-            <article class="rounded-md border border-lsa-line bg-white p-6 shadow-soft">
-              <h3 class="text-2xl text-lsa-forest">{card.title}</h3>
-              <p class="mt-4 font-sans text-sm leading-7 text-lsa-muted">
-                {card.description}
-              </p>
-            </article>
-          ))}
-        </div>
+        <article class="rounded-md border border-lsa-line bg-white p-6 shadow-soft sm:p-8">
+          <div class="space-y-5 font-sans text-base leading-8 text-lsa-muted">
+            {site.presidentMessage.body.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+          <div class="mt-8 border-t border-lsa-line pt-5">
+            <p class="text-2xl leading-tight text-lsa-forest">{site.presidentMessage.signerName}</p>
+            {site.presidentMessage.signerTitle && (
+              <p class="mt-2 font-sans text-sm font-semibold text-lsa-green">{site.presidentMessage.signerTitle}</p>
+            )}
+          </div>
+        </article>
       </div>
     </section>
 
@@ -135,21 +153,65 @@ const resourceSections = [
             {site.board.intro}
           </p>
         </div>
-        <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {boardMembers.map((member) => (
-            <article class="rounded-md border border-lsa-line bg-lsa-paper p-5">
-              {member.data.photo ? (
-                <img src={withBase(member.data.photo)} alt={member.data.photoAlt || member.data.name} class="aspect-[4/5] w-full rounded-md object-cover" loading="lazy" />
-              ) : (
-                <div class="aspect-[4/5] rounded-md bg-gradient-to-br from-lsa-sage via-white to-lsa-mist"></div>
-              )}
-              <p class="mt-5 font-sans text-xs font-bold uppercase tracking-[0.14em] text-lsa-copper">{member.data.role}</p>
-              <h3 class="mt-2 text-2xl text-lsa-forest">{member.data.name}</h3>
-              {member.data.professionalTitle && <p class="mt-2 font-sans text-sm font-semibold text-lsa-forest">{member.data.professionalTitle}</p>}
-              {member.data.institution && <p class="mt-1 font-sans text-sm leading-6 text-lsa-muted">{member.data.institution}</p>}
-              {member.body && <p class="mt-3 font-sans text-sm leading-6 text-lsa-muted">{member.body}</p>}
-            </article>
-          ))}
+        <div class="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          {boardMembers.map((member) => {
+            const bioParagraphs = getBioParagraphs(member.body || '');
+            const preview = bioParagraphs[0];
+            const dialogId = `bio-${member.id}`;
+
+            return (
+              <article class="flex rounded-md border border-lsa-line bg-lsa-paper p-5">
+                <div class="flex w-full flex-col">
+                  {member.data.photo ? (
+                    <img src={withBase(member.data.photo)} alt={member.data.photoAlt || member.data.name} class="aspect-[4/5] w-full rounded-md object-cover" loading="lazy" />
+                  ) : (
+                    <div class="aspect-[4/5] rounded-md bg-gradient-to-br from-lsa-sage via-white to-lsa-mist"></div>
+                  )}
+                  <p class="mt-5 font-sans text-xs font-bold uppercase tracking-[0.14em] text-lsa-copper">{member.data.role}</p>
+                  <h3 class="mt-2 text-2xl text-lsa-forest">{member.data.name}</h3>
+                  {member.data.specialty && <p class="mt-2 font-sans text-sm font-semibold text-lsa-forest">{member.data.specialty}</p>}
+                  {member.data.institution && <p class="mt-1 font-sans text-sm leading-6 text-lsa-muted">{member.data.institution}</p>}
+                  {preview && <p class="mt-4 flex-1 font-sans text-sm leading-7 text-lsa-muted">{preview}</p>}
+                  <div class="mt-5 flex flex-wrap items-center gap-4 font-sans text-sm font-semibold">
+                    {member.data.email && <a href={`mailto:${member.data.email}`} class="text-lsa-green underline">Email</a>}
+                    {member.data.linkedinUrl && <a href={member.data.linkedinUrl} target="_blank" rel="noreferrer" class="text-lsa-green underline">LinkedIn</a>}
+                  </div>
+                  {bioParagraphs.length > 0 && (
+                    <button
+                      type="button"
+                      class="mt-5 rounded-md border border-lsa-green px-4 py-3 font-sans text-sm font-semibold text-lsa-forest transition hover:bg-white"
+                      data-bio-open={dialogId}
+                      aria-controls={dialogId}
+                    >
+                      Read full bio
+                    </button>
+                  )}
+                  <dialog id={dialogId} class="board-bio-dialog max-h-[90vh] w-[min(92vw,760px)] rounded-md border border-lsa-line bg-white p-0 text-lsa-ink shadow-soft">
+                    <div class="max-h-[90vh] overflow-y-auto p-6 sm:p-8">
+                      <div class="flex items-start justify-between gap-6">
+                        <div>
+                          <p class="font-sans text-xs font-bold uppercase tracking-[0.14em] text-lsa-copper">{member.data.role}</p>
+                          <h4 class="mt-2 text-3xl leading-tight text-lsa-forest">{member.data.name}</h4>
+                          {member.data.specialty && <p class="mt-2 font-sans text-sm font-semibold text-lsa-green">{member.data.specialty}</p>}
+                        </div>
+                        <button type="button" class="rounded-md border border-lsa-line px-3 py-2 font-sans text-sm font-semibold text-lsa-forest" data-bio-close>
+                          Close
+                        </button>
+                      </div>
+                      {member.data.institution && <p class="mt-4 font-sans text-sm leading-6 text-lsa-muted">{member.data.institution}</p>}
+                      <div class="mt-6 space-y-5 font-sans text-base leading-8 text-lsa-muted">
+                        {bioParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+                      </div>
+                      <div class="mt-6 flex flex-wrap items-center gap-4 border-t border-lsa-line pt-5 font-sans text-sm font-semibold">
+                        {member.data.email && <a href={`mailto:${member.data.email}`} class="text-lsa-green underline">Email</a>}
+                        {member.data.linkedinUrl && <a href={member.data.linkedinUrl} target="_blank" rel="noreferrer" class="text-lsa-green underline">LinkedIn</a>}
+                      </div>
+                    </div>
+                  </dialog>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -228,6 +290,29 @@ const resourceSections = [
   <SiteFooter site={site} />
 
   <script>
+    const bioOpenButtons = document.querySelectorAll<HTMLButtonElement>('[data-bio-open]');
+    const bioDialogs = document.querySelectorAll<HTMLDialogElement>('.board-bio-dialog');
+
+    bioOpenButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const dialogId = button.dataset.bioOpen;
+        const dialog = dialogId ? document.getElementById(dialogId) as HTMLDialogElement | null : null;
+        dialog?.showModal();
+      });
+    });
+
+    bioDialogs.forEach((dialog) => {
+      dialog.querySelectorAll<HTMLButtonElement>('[data-bio-close]').forEach((button) => {
+        button.addEventListener('click', () => dialog.close());
+      });
+
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) {
+          dialog.close();
+        }
+      });
+    });
+
     const mailingForm = document.querySelector<HTMLFormElement>('.mailing-shell');
     const mailingStatus = document.querySelector<HTMLElement>('.mailing-shell-status');
     const mailingButton = mailingForm?.querySelector<HTMLButtonElement>('button[type="submit"]');

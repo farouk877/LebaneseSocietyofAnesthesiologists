@@ -12,6 +12,7 @@ Edit `Site Settings` for normal homepage copy:
 - Navigation labels and anchor links
 - About/history text and milestones
 - Mission, vision, and values cards
+- President message section
 - Board and resources section headings
 - Mailing-list section copy
 - Mailing-list Google Apps Script Web App URL and consent wording
@@ -29,13 +30,16 @@ Important fields:
 
 - `Name`: person displayed on the card.
 - `Board Role`: role such as President or Treasurer.
+- `Specialty`: specialty displayed on the card.
 - `Professional Title`: optional clinical or academic title.
 - `Institution`: optional affiliation.
+- `Email`: optional contact link.
+- `LinkedIn URL`: optional profile link.
 - `Photo`: optional portrait image.
 - `Photo Alt Text`: describe the person in the image.
 - `Display Order`: lower numbers appear first.
 - `Show on Website`: turn off to hide a member without deleting the record.
-- `Short Biography`: optional short profile text.
+- `Full Biography`: complete profile text shown in the bio popup. The first paragraph appears on the card.
 
 Photo guidance: use portrait-oriented images, ideally 4:5 aspect ratio and at least 800px wide.
 
