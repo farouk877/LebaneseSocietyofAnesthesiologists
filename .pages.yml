@@ -343,6 +343,10 @@ content:
       - name: institution
         label: Institution
         type: string
+      - name: cardBio
+        label: Card Biography
+        type: text
+        description: Optional short card text. If blank, the first paragraph of the full biography appears on the card.
       - name: email
         label: Email
         type: string

@@ -10,7 +10,7 @@ interface Props {
 const { site, home = false } = Astro.props;
 const homePrefix = home ? '' : withBase('/');
 const navItems = [
-  { label: 'About', href: `${homePrefix}#about` },
+  { label: 'About', href: home ? '#top' : withBase('/') },
   { label: 'Guidelines', href: withBase('/guidelines/') },
   { label: 'Events', href: withBase('/events/') },
   { label: 'University Resources', href: withBase('/university-resources/') },

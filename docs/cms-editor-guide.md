@@ -33,6 +33,7 @@ Important fields:
 - `Specialty`: specialty displayed on the card.
 - `Professional Title`: optional clinical or academic title.
 - `Institution`: optional affiliation.
+- `Card Biography`: optional short text shown on the board card. If blank, the first paragraph of the full biography appears.
 - `Email`: optional contact link.
 - `LinkedIn URL`: optional profile link.
 - `Photo`: optional portrait image.

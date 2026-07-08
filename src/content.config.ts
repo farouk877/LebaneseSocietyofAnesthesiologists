@@ -19,6 +19,7 @@ const board = defineCollection({
     specialty: z.string().optional(),
     professionalTitle: z.string().optional(),
     institution: z.string().optional(),
+    cardBio: z.string().optional(),
     email: z.union([z.email(), z.literal('')]).optional(),
     linkedinUrl: z.union([z.url(), z.literal('')]).optional(),
     photo: z.string().optional(),
