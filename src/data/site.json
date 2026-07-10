@@ -1,8 +1,8 @@
 {
   "societyName": "Lebanese Society of Anesthesiologists",
   "logo": {
-    "src": "/images/lsa-placeholder-logo.svg",
-    "alt": "Temporary LSA logo"
+    "src": "/images/lsa-logo.png",
+    "alt": "Lebanese Society of Anesthesiologists logo"
   },
   "hero": {
     "eyebrow": "Lebanese Society of Anesthesiologists",

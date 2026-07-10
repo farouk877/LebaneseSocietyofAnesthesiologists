@@ -31,6 +31,9 @@ const socialImageUrl = socialImage
     {socialImageUrl && <meta property="og:image" content={socialImageUrl} />}
     <meta name="twitter:card" content="summary_large_image" />
     {socialImageUrl && <meta name="twitter:image" content={socialImageUrl} />}
+    <link rel="icon" type="image/png" sizes="32x32" href={withBase('/images/favicon-32x32.png')} />
+    <link rel="icon" type="image/png" sizes="16x16" href={withBase('/images/favicon-16x16.png')} />
+    <link rel="apple-touch-icon" sizes="180x180" href={withBase('/images/apple-touch-icon.png')} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
