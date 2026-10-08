@@ -9,7 +9,7 @@ file: ""
 image: ""
 imageAlt: ""
 featured: false
-status: "published"
+status: "draft"
 order: 4
 ---
 

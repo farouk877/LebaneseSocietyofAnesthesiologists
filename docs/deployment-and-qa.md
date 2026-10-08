@@ -65,7 +65,7 @@ Warnings are allowed during development. Failures should be fixed before deploym
 - Header navigation works on all pages.
 - Mobile navigation opens, closes, and follows links.
 - About and Join Mailing List anchors work from non-home pages.
-- Guidelines, Events, University Resources, and Articles pages render.
+- Events, University Resources, and Articles pages render.
 - Article detail page renders and the back link returns to `/articles/`.
 - Mailing-list form rejects invalid email.
 - Mailing-list form requires consent.

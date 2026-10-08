@@ -1,7 +1,7 @@
 {
   "societyName": "Lebanese Society of Anesthesiologists",
   "logo": {
-    "src": "/images/lsa-logo.png",
+    "src": "/images/lsa-logo-transparent.png",
     "alt": "Lebanese Society of Anesthesiologists logo"
   },
   "hero": {
@@ -23,10 +23,6 @@
     {
       "label": "About",
       "href": "#about"
-    },
-    {
-      "label": "Guidelines",
-      "href": "/guidelines/"
     },
     {
       "label": "Events",
@@ -135,10 +131,6 @@
       {
         "label": "About",
         "href": "/#about"
-      },
-      {
-        "label": "Guidelines",
-        "href": "/guidelines/"
       },
       {
         "label": "Events",

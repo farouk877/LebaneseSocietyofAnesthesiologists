@@ -13,6 +13,10 @@ const boardMembers = (await getCollection('board'))
   .filter((member) => member.data.active)
   .sort((a, b) => a.data.order - b.data.order || a.data.name.localeCompare(b.data.name));
 
+const subcommitteeMembers = (await getCollection('subcommittee'))
+  .filter((member) => member.data.active)
+  .sort((a, b) => a.data.order - b.data.order);
+
 const getBioParagraphs = (body: string) =>
   body
     .trim()
@@ -21,11 +25,6 @@ const getBioParagraphs = (body: string) =>
     .filter(Boolean);
 
 const resourceSections = [
-  {
-    label: 'Guidelines',
-    href: withBase('/guidelines/'),
-    description: 'Clinical guidance and practice resources curated for anesthesiology professionals.'
-  },
   {
     label: 'Events',
     href: withBase('/events/'),
@@ -155,25 +154,25 @@ const resourceSections = [
             </p>
           )}
         </div>
-        <div class="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {boardMembers.map((member) => {
             const bioParagraphs = getBioParagraphs(member.body || '');
             const preview = member.data.cardBio || bioParagraphs[0];
             const dialogId = `bio-${member.id}`;
 
             return (
-              <article class="flex rounded-md border border-lsa-line bg-lsa-paper p-5">
+              <article class="flex rounded-md border border-lsa-line bg-lsa-paper p-4">
                 <div class="flex w-full flex-col">
                   {member.data.photo ? (
-                    <img src={withBase(member.data.photo)} alt={member.data.photoAlt || member.data.name} class="aspect-[4/5] w-full rounded-md object-cover" loading="lazy" />
+                    <img src={withBase(member.data.photo)} alt={member.data.photoAlt || member.data.name} class="mx-auto h-40 w-32 rounded-md object-cover object-top" loading="lazy" />
                   ) : (
-                    <div class="aspect-[4/5] rounded-md bg-gradient-to-br from-lsa-sage via-white to-lsa-mist"></div>
+                    <div class="mx-auto flex h-40 w-32 items-center justify-center rounded-md bg-lsa-mist font-sans text-sm text-lsa-muted" aria-hidden="true">LSA</div>
                   )}
                   <p class="mt-5 font-sans text-xs font-bold uppercase tracking-[0.14em] text-lsa-copper">{member.data.role}</p>
-                  <h3 class="mt-2 text-2xl text-lsa-forest">{member.data.name}</h3>
+                  <h3 class="mt-2 text-xl leading-tight text-lsa-forest">{member.data.name}</h3>
                   {member.data.specialty && <p class="mt-2 font-sans text-sm font-semibold text-lsa-forest">{member.data.specialty}</p>}
                   {preview && (
-                    <p class="mt-4 flex-1 font-sans text-sm leading-7 text-lsa-muted">
+                    <p class="mt-3 flex-1 font-sans text-sm leading-6 text-lsa-muted">
                       {preview}
                       {bioParagraphs.length > 0 && (
                         <>
@@ -220,6 +219,28 @@ const resourceSections = [
       </div>
     </section>
 
+    <section id="subcommittee" class="scroll-mt-24 border-t border-lsa-line bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <h2 class="text-3xl leading-tight text-lsa-forest">LSA Subcommittee</h2>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {subcommitteeMembers.map((member) => (
+            <article class="flex items-center gap-4 rounded-md border border-lsa-line bg-lsa-paper p-4">
+              {member.data.photo ? (
+                <img src={withBase(member.data.photo)} alt={member.data.photoAlt || member.data.name} class="h-24 w-20 shrink-0 rounded-md object-cover object-top" loading="lazy" />
+              ) : (
+                <div class="flex h-24 w-20 shrink-0 items-center justify-center rounded-md bg-lsa-mist font-sans text-sm text-lsa-green" aria-hidden="true">LSA</div>
+              )}
+              <div class="min-w-0">
+                <p class="font-sans text-xs font-semibold text-lsa-green">{member.data.role}</p>
+                <h3 class="mt-2 text-xl leading-tight text-lsa-forest">{member.data.name}</h3>
+                {member.data.specialty && <p class="mt-2 font-sans text-sm text-lsa-muted">{member.data.specialty}</p>}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <section id="resources" class="scroll-mt-24 border-y border-lsa-line bg-lsa-paper">
       <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div class="max-w-3xl">
@@ -227,7 +248,7 @@ const resourceSections = [
           {site.resources.heading && <h2 class="mt-4 text-4xl leading-tight text-lsa-forest sm:text-5xl">{site.resources.heading}</h2>}
           {site.resources.intro && <p class="mt-5 max-w-2xl font-sans text-base leading-8 text-lsa-muted">{site.resources.intro}</p>}
         </div>
-        <div class="mt-10 grid grid-cols-2 gap-3 md:gap-5 xl:grid-cols-4">
+        <div class="mt-10 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-5">
           {resourceSections.map((section) => (
             <a href={section.href} class="flex min-h-[170px] flex-col rounded-md border border-lsa-line bg-white p-4 no-underline shadow-soft transition hover:border-lsa-green sm:min-h-[210px] sm:p-6">
               <h3 class="text-xl leading-tight text-lsa-forest sm:text-2xl">{section.label}</h3>

@@ -6,6 +6,7 @@ This is the Phase 0 proposal for keeping routine site updates editable by non-en
 
 - `src/data/site.json`: singleton site settings for homepage copy, navigation labels, contact details, footer copy, and SEO defaults.
 - `src/content/board/`: one Markdown record per board member.
+- `src/content/subcommittee/`: one Markdown record per subcommittee member.
 - `src/content/resources/`: one Markdown record per resource item.
 - `public/uploads/images/`: Pages CMS upload target for board photos, resource images, logo replacements, and social sharing images.
 - `public/uploads/documents/`: Pages CMS upload target for downloadable resource files.
@@ -14,11 +15,11 @@ This is the Phase 0 proposal for keeping routine site updates editable by non-en
 
 - Site Settings
 - Board Members
+- LSA Subcommittee
 - Resources
 
 ## Proposed Resource Categories
 
-- `guidelines`
 - `lsa-events`
 - `university-resources`
 - `article-of-the-month`

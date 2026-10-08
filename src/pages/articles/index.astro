@@ -10,7 +10,8 @@ import { withBase } from '@utils/paths';
 const site = siteSchema.parse(siteJson);
 const monthFormatter = new Intl.DateTimeFormat('en-US', {
   month: 'long',
-  year: 'numeric'
+  year: 'numeric',
+  timeZone: 'UTC'
 });
 
 const articles = (await getCollection('resources'))

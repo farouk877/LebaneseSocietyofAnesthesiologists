@@ -6,11 +6,11 @@ const distDir = join(root, 'dist');
 const basePath = normalizeBasePath(process.env.BASE_PATH || '/');
 const requiredRoutes = [
   'index.html',
-  'guidelines/index.html',
   'events/index.html',
   'university-resources/index.html',
   'articles/index.html',
-  'articles/monthly-article-placeholder/index.html',
+  'articles/october-2026-difficult-airway/index.html',
+  'articles/september-2026-critical-care-echocardiography/index.html',
   'sitemap-index.xml'
 ];
 const failures = [];

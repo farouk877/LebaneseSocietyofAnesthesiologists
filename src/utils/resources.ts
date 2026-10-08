@@ -1,12 +1,10 @@
 export const resourceRoutes = {
-  guidelines: '/guidelines/',
   'lsa-events': '/events/',
   'university-resources': '/university-resources/',
   'article-of-the-month': '/articles/'
 } as const;
 
 export const resourceLabels = {
-  guidelines: 'Guidelines',
   'lsa-events': 'Events',
   'university-resources': 'University Resources',
   'article-of-the-month': 'Articles'

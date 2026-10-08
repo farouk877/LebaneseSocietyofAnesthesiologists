@@ -375,6 +375,39 @@ content:
         options:
           media: false
 
+  - name: subcommittee
+    label: LSA Subcommittee
+    type: collection
+    path: src/content/subcommittee
+    fields:
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: role
+        label: Role
+        type: string
+        required: true
+      - name: specialty
+        label: Specialty
+        type: string
+      - name: photo
+        label: Photo
+        type: image
+        options:
+          media: images
+          path: public/uploads/images/subcommittee
+      - name: photoAlt
+        label: Photo Alt Text
+        type: string
+      - name: order
+        label: Display Order
+        type: number
+        required: true
+      - name: active
+        label: Show on Website
+        type: boolean
+
   - name: resources
     label: Resources
     type: collection
@@ -390,8 +423,6 @@ content:
         required: true
         options:
           values:
-            - name: guidelines
-              label: Guidelines
             - name: lsa-events
               label: LSA Events
             - name: university-resources
@@ -406,6 +437,12 @@ content:
         label: Resource Date
         type: date
         required: true
+      - name: endDate
+        label: Event End Date
+        type: date
+      - name: location
+        label: Event Location
+        type: string
       - name: source
         label: Source / Publisher
         type: string

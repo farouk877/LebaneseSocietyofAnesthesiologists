@@ -3,7 +3,6 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 const resourceCategories = [
-  'guidelines',
   'lsa-events',
   'university-resources',
   'article-of-the-month'
@@ -11,9 +10,7 @@ const resourceCategories = [
 
 const statusValues = ['draft', 'published', 'archived'] as const;
 
-const board = defineCollection({
-  loader: glob({ base: './src/content/board', pattern: '**/*.md' }),
-  schema: z.object({
+const personSchema = z.object({
     name: z.string().min(1),
     role: z.string().min(1),
     specialty: z.string().optional(),
@@ -26,7 +23,16 @@ const board = defineCollection({
     photoAlt: z.string().optional(),
     order: z.number().int().nonnegative().default(0),
     active: z.boolean().default(true)
-  })
+  });
+
+const board = defineCollection({
+  loader: glob({ base: './src/content/board', pattern: '**/*.md' }),
+  schema: personSchema
+});
+
+const subcommittee = defineCollection({
+  loader: glob({ base: './src/content/subcommittee', pattern: '**/*.md' }),
+  schema: personSchema
 });
 
 const resources = defineCollection({
@@ -36,6 +42,8 @@ const resources = defineCollection({
     category: z.enum(resourceCategories),
     summary: z.string().min(1),
     date: z.coerce.date(),
+    endDate: z.coerce.date().optional(),
+    location: z.string().optional(),
     source: z.string().optional(),
     externalUrl: z.union([z.url(), z.literal('')]).optional(),
     file: z.string().optional(),
@@ -49,5 +57,6 @@ const resources = defineCollection({
 
 export const collections = {
   board,
+  subcommittee,
   resources
 };

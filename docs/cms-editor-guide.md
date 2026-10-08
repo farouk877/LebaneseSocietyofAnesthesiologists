@@ -44,11 +44,14 @@ Important fields:
 
 Photo guidance: use portrait-oriented images, ideally 4:5 aspect ratio and at least 800px wide.
 
+## LSA Subcommittee
+
+Use `LSA Subcommittee` to replace the three placeholder people with names, roles, specialties, and photos. Lower display-order numbers appear first; turn off `Show on Website` to hide a person.
+
 ## Resources
 
-Use `Resources` for all four launch categories:
+Use `Resources` for these categories:
 
-- Guidelines
 - LSA Events
 - University Resources
 - Articles of the Month
@@ -62,9 +65,9 @@ Important fields:
 - `External URL`: for outside links.
 - `Downloadable File`: for PDFs or documents uploaded through Pages CMS.
 
-Current behavior: the homepage links to four dedicated pages: Guidelines, Events, University Resources, and Articles.
+Current behavior: the homepage links to three dedicated pages: Events, University Resources, and Articles.
 
-Guidelines, Events, and University Resources appear only on their category listing pages. Use `External URL` or `Downloadable File` for the public link.
+Events and University Resources appear only on their category listing pages. Use `External URL` or `Downloadable File` for the public link. For events, set the starting `Resource Date`, optional `Event End Date`, and `Event Location`. Upload a flyer in `Image` so it appears on the event listing; visitors can click it to open the full-size image.
 
 Articles of the Month appear at `/articles/`, with the newest article first, and each article gets its own detail page. To add one, create a new Resource, choose `Articles of the Month`, set `Publication Status` to `Published`, write the article body in the rich-text field, and optionally add `External URL` as the source article link.
 
